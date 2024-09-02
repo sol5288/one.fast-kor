@@ -9,8 +9,8 @@ services:
     ports:
       - "3001:3000"
     volumes:
-      - oneapi_data:/data
-      - logs:/app/logs
+      - ./data/oneapi:/data
+      - ./logs:/app/logs
     environment:
       - SQL_DSN=oneapi:1q2w3e4r@tcp(db:3306)/one-api
       - REDIS_CONN_STRING=redis://redis
@@ -36,8 +36,7 @@ services:
     restart: always
     container_name: mysql
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./mysql-init.sql:/docker-entrypoint-initdb.d/init.sql  # 초기화
+      - ./data/mysql:/var/lib/mysql 
     ports:
       - '3308:3306'
     command: 
@@ -59,8 +58,3 @@ networks:
   default:
   fastgpt-network:
     external: true
-
-volumes:
-  mysql_data:
-  oneapi_data:
-  logs:
