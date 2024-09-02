@@ -18,7 +18,7 @@ services:
       - ./data/pg:/var/lib/postgresql/data
 
   mongo:
-    image: mongo:4.4
+    image: mongo:4.4.9
     container_name: mongo
     restart: always
     ports:
@@ -28,7 +28,7 @@ services:
       - fastgpt-network
     command: mongod --keyFile /data/mongodb.key --replSet rs0
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=mymonggo
+      - MONGO_INITDB_ROOT_USERNAME=mymongo
       - MONGO_INITDB_ROOT_PASSWORD=1q2w3e4r
     volumes:
       - ./data/mongo:/data/db
@@ -49,11 +49,11 @@ services:
           })
         }' > /data/initReplicaSet.js
         exec docker-entrypoint.sh "$$@" &
-        until mongo -u mymonggo -p 1q2w3e4r --authenticationDatabase admin --eval "print('waited for connection')" > /dev/null 2>&1; do
+        until mongo -u mymongo -p 1q2w3e4r --authenticationDatabase admin --eval "print('waited for connection')" > /dev/null 2>&1; do
           echo "Waiting for MongoDB to start..."
           sleep 2
         done
-        mongo -u mymonggo -p 1q2w3e4r --authenticationDatabase admin /data/initReplicaSet.js
+        mongo -u mymongo -p 1q2w3e4r --authenticationDatabase admin /data/initReplicaSet.js
         wait $$!
 
   sandbox:
@@ -85,7 +85,7 @@ services:
       - TOKEN_KEY=any
       - ROOT_KEY=root_key
       - FILE_TOKEN_KEY=filetoken
-      - MONGODB_URI=mongodb://mymonggo:1q2w3e4r@mongo:27017/fastgpt?authSource=admin
+      - MONGODB_URI=mongodb://mymongo:1q2w3e4r@mongo:27017/fastgpt?authSource=admin
       - PG_URL=postgresql://mypg:1q2w3e4r@pg:5432/postgres
       - SANDBOX_URL=http://sandbox:3000
       - LOG_LEVEL=info
