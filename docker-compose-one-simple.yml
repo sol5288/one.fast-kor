@@ -32,7 +32,7 @@ services:
       - fastgpt-network
 
   db:
-    image: "${REGISTRY:-docker.io}/mysql:8.2.0"
+    image: "${REGISTRY:-docker.io}/mysql:5.7"
     restart: always
     container_name: mysql
     volumes:
