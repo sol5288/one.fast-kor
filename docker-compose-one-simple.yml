@@ -3,9 +3,6 @@
 services:
   one-api:
     image: ghcr.io/sol5288/one-api-kor:v0.11.5
-    build:
-      context: /mnt/d/yihansoft/26_One_Hub
-      dockerfile: Dockerfile
     container_name: one-api
     restart: always
     command: --log-dir /app/logs
