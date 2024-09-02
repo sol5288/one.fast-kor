@@ -15,7 +15,7 @@ services:
       - POSTGRES_PASSWORD=1q2w3e4r
       - POSTGRES_DB=postgres
     volumes:
-      - ./pg/data:/var/lib/postgresql/data
+      - ./data/pg:/var/lib/postgresql/data
 
   mongo:
     image: mongo:4.4
@@ -31,7 +31,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=mymonggo
       - MONGO_INITDB_ROOT_PASSWORD=1q2w3e4r
     volumes:
-      - ./mongo/data:/data/db
+      - ./data/mongo:/data/db
     entrypoint:
       - bash
       - -c
