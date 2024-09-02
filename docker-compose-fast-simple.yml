@@ -6,7 +6,7 @@ services:
     container_name: pg
     restart: always
     ports:
-      - 5432:5432
+      - 5433:5433
     networks:
       - fastgpt
       - fastgpt-network
@@ -86,7 +86,7 @@ services:
       - ROOT_KEY=root_key
       - FILE_TOKEN_KEY=filetoken
       - MONGODB_URI=mongodb://mymonggo:1q2w3e4r@mongo:27017/fastgpt?authSource=admin
-      - PG_URL=postgresql://mypg:1q2w3e4r@pg:5432/postgres
+      - PG_URL=postgresql://mypg:1q2w3e4r@pg:5433/postgres
       - SANDBOX_URL=http://sandbox:3000
       - LOG_LEVEL=info
       - STORE_LOG_LEVEL=warn
