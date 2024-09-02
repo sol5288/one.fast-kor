@@ -20,7 +20,7 @@ services:
       - redis
       - db
     networks:
-      - default
+      - one-api-network
       - fastgpt-network
 
   redis:
@@ -28,7 +28,7 @@ services:
     container_name: redis
     restart: always
     networks:
-      - default
+      - one-api-network
       - fastgpt-network
 
   db:
@@ -52,10 +52,10 @@ services:
       MYSQL_PASSWORD: '1q2w3e4r'
       MYSQL_DATABASE: one-api
     networks:
-      - default
+      - one-api-network
       - fastgpt-network
 
 networks:
-  default:
+  one-api-network:
   fastgpt-network:
     external: true
