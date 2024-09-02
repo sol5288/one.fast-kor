@@ -1,0 +1,68 @@
+# version: '3.4'
+
+services:
+  one-api:
+    image: ghcr.io/sol5288/one-api-kor:v0.11.5
+    build:
+      context: /mnt/d/yihansoft/26_One_Hub
+      dockerfile: Dockerfile
+    container_name: one-api
+    restart: always
+    command: --log-dir /app/logs
+    ports:
+      - "3001:3000"
+    volumes:
+      - oneapi_data:/data
+      - logs:/app/logs
+    environment:
+      - SQL_DSN=oneapi:1q2w3e4r@tcp(db:3306)/one-api
+      - REDIS_CONN_STRING=redis://redis
+      - SESSION_SECRET=random_string
+      - TZ=Asia/Seoul
+    depends_on:
+      - redis
+      - db
+    networks:
+      - default
+      - fastgpt-network
+
+  redis:
+    image: "${REGISTRY:-docker.io}/redis:latest"
+    container_name: redis
+    restart: always
+    networks:
+      - default
+      - fastgpt-network
+
+  db:
+    image: "${REGISTRY:-docker.io}/mysql:8.2.0"
+    restart: always
+    container_name: mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - '3307:3306'
+    command: 
+        - mysqld
+        - --user=mysql
+        - --ssl=0
+        - --require_secure_transport=OFF
+    environment:
+      TZ: Asia/Seoul
+      MYSQL_ROOT_PASSWORD: '1q2w3e4r'
+      MYSQL_USER: oneapi
+      MYSQL_PASSWORD: '1q2w3e4r'
+      MYSQL_DATABASE: one-api
+    networks:
+      - default
+      - fastgpt-network
+
+networks:
+  default:
+  fastgpt-network:
+    external: true
+
+volumes:
+  mysql_data:
+  oneapi_data:
+  logs:
