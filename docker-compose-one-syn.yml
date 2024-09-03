@@ -1,0 +1,61 @@
+# version: '3.4'
+
+services:
+  one-api:
+    image: ghcr.io/sol5288/one-api-kor:latest
+    container_name: one-api
+    restart: always
+    command: --log-dir /app/logs
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./data/oneapi:/data
+      - ./logs:/app/logs
+    environment:
+      - SQL_DSN=oneapi:1q2w3e4r@tcp(db:3306)/one-api
+      - REDIS_CONN_STRING=redis://redis
+      - SESSION_SECRET=random_string
+      - TZ=Asia/Seoul
+    depends_on:
+      - redis
+      - db
+    networks:
+      - one-api-network
+      - fastgpt-network
+
+  redis:
+    image: "${REGISTRY:-docker.io}/redis:latest"
+    container_name: redis
+    restart: always
+    networks:
+      - one-api-network
+      - fastgpt-network
+
+  db:
+    image: "${REGISTRY:-docker.io}/mysql:5.7"
+    restart: always
+    container_name: mysql
+    volumes:
+      - ./data/mysql:/var/lib/mysql 
+      - ./mysql-init.sql:/docker-entrypoint-initdb.d/init.sql  # 초기화
+    ports:
+      - '3308:3306'
+    command: 
+        - mysqld
+        - --user=mysql
+        - --ssl=0
+        - --require_secure_transport=OFF
+    environment:
+      TZ: Asia/Seoul
+      MYSQL_ROOT_PASSWORD: '1q2w3e4r'
+      MYSQL_USER: oneapi
+      MYSQL_PASSWORD: '1q2w3e4r'
+      MYSQL_DATABASE: one-api
+    networks:
+      - one-api-network
+      - fastgpt-network
+
+networks:
+  one-api-network:
+  fastgpt-network:
+    external: true
