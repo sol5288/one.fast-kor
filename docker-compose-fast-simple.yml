@@ -1,0 +1,99 @@
+#version: '3.3'
+
+services:
+  pg:
+    image: pgvector/pgvector:0.7.0-pg15
+    container_name: pg
+    restart: always
+    ports:
+      - 5433:5432
+    networks:
+      - fastgpt
+      - fastgpt-network
+    environment:
+      - POSTGRES_USER=mypg
+      - POSTGRES_PASSWORD=1q2w3e4r
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./data/pg:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:4.4.9
+    container_name: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - fastgpt
+      - fastgpt-network
+    command: mongod --keyFile /data/mongodb.key --replSet rs0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mymongo
+      - MONGO_INITDB_ROOT_PASSWORD=1q2w3e4r
+    volumes:
+      - ./data/mongo:/data/db
+    entrypoint:
+      - bash
+      - -c
+      - |
+        openssl rand -base64 128 > /data/mongodb.key
+        chmod 400 /data/mongodb.key
+        chown 999:999 /data/mongodb.key
+        echo 'const isInited = rs.status().ok === 1
+        if(!isInited){
+          rs.initiate({
+              _id: "rs0",
+              members: [
+                  { _id: 0, host: "mongo:27017" }
+              ]
+          })
+        }' > /data/initReplicaSet.js
+        exec docker-entrypoint.sh "$$@" &
+        until mongo -u mymongo -p 1q2w3e4r --authenticationDatabase admin --eval "print('waited for connection')" > /dev/null 2>&1; do
+          echo "Waiting for MongoDB to start..."
+          sleep 2
+        done
+        mongo -u mymongo -p 1q2w3e4r --authenticationDatabase admin /data/initReplicaSet.js
+        wait $$!
+
+  sandbox:
+    container_name: sandbox
+    image: ghcr.io/labring/fastgpt-sandbox:latest
+    networks:
+      - fastgpt
+      - fastgpt-network
+    restart: always
+
+  fastgpt:
+    container_name: fastgpt
+    image: ghcr.io/sol5288/fastgpt-kor:v4.8.1
+    ports:
+      - 3000:3000
+    networks:
+      - fastgpt
+      - fastgpt-network
+    depends_on:
+      - mongo
+      - pg
+      - sandbox
+    restart: always
+    environment:
+      - DEFAULT_ROOT_PSW=1234
+      - OPENAI_BASE_URL=http://one-api:3000/v1
+      - CHAT_API_KEY=sk-toyFa7mtza6f52XSEf31C9Ad2eE74eC9B18307C59f0aC16d
+      - DB_MAX_LINK=30
+      - TOKEN_KEY=any
+      - ROOT_KEY=root_key
+      - FILE_TOKEN_KEY=filetoken
+      - MONGODB_URI=mongodb://mymongo:1q2w3e4r@mongo:27017/fastgpt?authSource=admin
+      - PG_URL=postgresql://mypg:1q2w3e4r@pg:5432/postgres
+      - SANDBOX_URL=http://sandbox:3000
+      - LOG_LEVEL=info
+      - STORE_LOG_LEVEL=warn
+    volumes:
+      - ./config:/app/data
+
+networks:
+  fastgpt:
+  fastgpt-network:
+    external: true
