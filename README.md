@@ -17,9 +17,9 @@
    2. fastgpt  
       `docker-compose -f docker-compose-fast-win.yml up -d`
 6. 중지
-   1. one-api
+   1. one-api  
       `docker-compose -f docker-compose-one-win.yml down`
-   2. fastgpt
+   2. fastgpt  
       `docker-compose -f docker-compose-fast-win.yml down`  
       ※ 볼륨 지우려면 마지막에 공백 하나 후 -v 옵션 추가
 
@@ -27,3 +27,20 @@
 
 - docker-compose-one-syn.yml
 - docker-compose-fast-syn.yml
+
+1. windows와 차이점
+   - build 부분 삭제
+   - healthcheck 삭제
+   - 볼륨 마운트를 호스트 폴더로 지정
+   - 몽고db, mysql 버전 낮춤
+   - 포트변경 (시놀로지 기 사용포트 충돌)
+2. 볼륨 마운트 변경으로, 아래와 같은 구조의 빈 폴더 생성해야 함
+   ```
+   설치폴더/
+    ├── logs/
+    └── data/
+         ├── oneapi/
+         ├── mongo/
+         ├── pg/
+         └── mysql/
+   ```
