@@ -156,7 +156,7 @@
       "model": "rerank-multilingual-v3.0",
       "name": "rerank-multi-v3.0",
       "requestUrl": "https://api.cohere.ai/v1/rerank",
-      "requestAuth": "ahuDu8zA156B2ckeqqtkf5aakji8vSBF01C1NkZ0"
+      "requestAuth": "API-KEY"
     }
   ], // 재정렬 모델 목록
   "audioSpeechModels": [
