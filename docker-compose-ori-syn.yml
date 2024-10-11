@@ -125,18 +125,23 @@ services:
     restart: always
     ports:
       - 3308:3306
-    networks:
-      - fastgpt
-    command: --default-authentication-plugin=mysql_native_password
+    command: 
+        - mysqld
+        - --user=mysql
+        - --ssl=0
+        - --require_secure_transport=OFF
     environment:
       TZ: Asia/Seoul
       # 默认root密码，仅首次运行有效
       MYSQL_ROOT_PASSWORD: '1q2w3e4r'
       MYSQL_USER: oneapi
       MYSQL_PASSWORD: '1q2w3e4r'
-      MYSQL_DATABASE: oneapi  
+      MYSQL_DATABASE: oneapi
     volumes:
       - ./data/mysql:/var/lib/mysql
+      - ./mysql-init.sql:/docker-entrypoint-initdb.d/init.sql  # 초기화
+    networks:
+      - fastgpt
   oneapi:
     container_name: oneapi
     image: ghcr.io/songquanpeng/one-api:latest
