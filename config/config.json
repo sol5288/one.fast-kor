@@ -10,7 +10,7 @@
   },
   "llmModels": [
     {
-      "model": "gpt-4o-mini-2024-07-18", // 모델 이름(OneAPI의 채널 모델 이름에 해당)
+      "model": "gpt-4o-mini", // 모델 이름(OneAPI의 채널 모델 이름에 해당)
       "name": "gpt-4o-mini", // 모델 별명
       "avatar": "/imgs/model/openai.svg", // 모델 로고
       "maxContext": 125000, // 최대 컨텍스트 길이
@@ -102,12 +102,12 @@
       "defaultConfig": {}
     },
     {
-      "model": "gemini-1.5-flash",
+      "model": "gemini-1.5-flash-002",
       "name": "gemini-1.5-flash",
       "avatar": "/imgs/model/openai.svg",
       "maxContext": 125000,
-      "maxResponse": 4000,
-      "quoteMaxToken": 120000,
+      "maxResponse": 8000,
+      "quoteMaxToken": 110000,
       "maxTemperature": 1.0,
       "charsPointsPrice": 0,
       "censor": false,
@@ -127,28 +127,18 @@
   ],
   "vectorModels": [
     {
-      "model": "text-embedding-3-small", // 모델 이름 (OneAPI에 해당)
-      "name": "text-embedding-3-small", // 모델 표시 이름
+      "model": "text-embedding-3-large", // 모델 이름 (OneAPI에 해당)
+      "name": "text-embedding-3-large", // 모델 표시 이름
       "avatar": "/imgs/model/openai.svg", // 로고
       "charsPointsPrice": 0, // n 포인트/1k 토큰
       "defaultToken": 512, // 기본 텍스트 분할 시의 토큰 수
       "maxToken": 3000, // 최대 토큰 수
       "weight": 100, // 우선 훈련 가중치
-      "defaultConfig": {}, // 사용자 정의 추가 파라미터. 예를 들어, embedding3-large를 사용하려면 dimensions:1024를 전달하여 1024 차원의 벡터를 반환하도록 설정.
-      "dbConfig": {}, // 저장 시의 추가 파라미터 (비대칭 벡터 모델에서 필요)
-      "queryConfig": {} // 훈련 시의 추가 파라미터
-    },
-    {
-      "model": "text-embedding-3-large",
-      "name": "text-embedding-3-large",
-      "avatar": "/imgs/model/openai.svg",
-      "charsPointsPrice": 0,
-      "defaultToken": 512,
-      "maxToken": 3000,
-      "weight": 100,
       "defaultConfig": {
         "dimensions": 1024 // 벡터 차원 수
-      }
+      }, // 사용자 정의 추가 파라미터. 예를 들어, embedding3-large를 사용하려면 dimensions:1024를 전달하여 1024 차원의 벡터를 반환하도록 설정.
+      "dbConfig": {}, // 저장 시의 추가 파라미터 (비대칭 벡터 모델에서 필요)
+      "queryConfig": {} // 훈련 시의 추가 파라미터
     }
   ],
   "reRankModels": [
