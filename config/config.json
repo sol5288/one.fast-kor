@@ -10,8 +10,8 @@
   },
   "llmModels": [
     {
-      "model": "gpt-4o-mini", // 모델 이름(OneAPI의 채널 모델 이름에 해당)
-      "name": "gpt-4o-mini", // 모델 별명
+      "model": "gpt-4o-mini-2024-07-18", // 모델 이름(OneAPI의 채널 모델 이름에 해당)
+      "name": "gpt-4o-mini-2024-07-18", // 모델 별명
       "avatar": "/imgs/model/openai.svg", // 모델 로고
       "maxContext": 125000, // 최대 컨텍스트 길이
       "maxResponse": 15000, // 최대 응답 길이
@@ -31,6 +31,29 @@
       "customExtractPrompt": "", // 사용자 정의 내용 추출 프롬프트
       "defaultSystemChatPrompt": "", // 대화에 기본적으로 포함되는 시스템 프롬프트
       "defaultConfig": {} // API 요청 시 기본 설정을 포함 (예: GLM4의 top_p)
+    },
+    {
+      "model": "gpt-4o-mini",
+      "name": "gpt-4o-mini",
+      "avatar": "/imgs/model/openai.svg",
+      "maxContext": 125000,
+      "maxResponse": 15000,
+      "quoteMaxToken": 110000,
+      "maxTemperature": 1.0,
+      "charsPointsPrice": 0,
+      "censor": false,
+      "vision": true,
+      "datasetProcess": false,
+      "usedInClassify": true,
+      "usedInExtractFields": true,
+      "usedInToolCall": true,
+      "usedInQueryExtension": true,
+      "toolChoice": true,
+      "functionCall": false,
+      "customCQPrompt": "",
+      "customExtractPrompt": "",
+      "defaultSystemChatPrompt": "",
+      "defaultConfig": {}
     },
     {
       "model": "gpt-4o-2024-08-06",
