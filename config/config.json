@@ -11,7 +11,7 @@
   "llmModels": [
     {
       "model": "gpt-4o-mini-2024-07-18", // 모델 이름(OneAPI의 채널 모델 이름에 해당)
-      "name": "gpt-4o-mini-2024-07-18", // 모델 별명
+      "name": "gpt-4o-mini-open", // 모델 별명
       "avatar": "/imgs/model/openai.svg", // 모델 로고
       "maxContext": 125000, // 최대 컨텍스트 길이
       "maxResponse": 15000, // 최대 응답 길이
