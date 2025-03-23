@@ -56,7 +56,7 @@
       "defaultConfig": {}
     },
     {
-      "model": "gpt-4o-2024-08-06",
+      "model": "gpt-4o-2024-11-20",
       "name": "gpt-4o",
       "avatar": "/imgs/model/openai.svg",
       "maxContext": 125000,
@@ -79,7 +79,7 @@
       "defaultConfig": {}
     },
     {
-      "model": "claude-3-5-sonnet-20240620",
+      "model": "claude-3-5-sonnet-20241022",
       "name": "claude-3-5-sonnet",
       "avatar": "/imgs/model/openai.svg",
       "maxContext": 125000,
@@ -146,6 +146,121 @@
       "customExtractPrompt": "",
       "defaultSystemChatPrompt": "",
       "defaultConfig": {}
+    },
+    {
+      "model": "gemini-2.0-flash-exp",
+      "name": "gemini-2.0-flash-exp",
+      "avatar": "/imgs/model/openai.svg",
+      "maxContext": 125000,
+      "maxResponse": 8000,
+      "quoteMaxToken": 110000,
+      "maxTemperature": 1.0,
+      "charsPointsPrice": 0,
+      "censor": false,
+      "vision": true,
+      "datasetProcess": false,
+      "usedInClassify": true,
+      "usedInExtractFields": true,
+      "usedInToolCall": true,
+      "usedInQueryExtension": true,
+      "toolChoice": true,
+      "functionCall": false,
+      "customCQPrompt": "",
+      "customExtractPrompt": "",
+      "defaultSystemChatPrompt": "",
+      "defaultConfig": {}
+    },
+    {
+      "model": "gemini-2.0-flash-thinking-exp-01-21",
+      "name": "gemini-2.0-flash-thinking",
+      "avatar": "/imgs/model/openai.svg",
+      "maxContext": 125000,
+      "maxResponse": 8000,
+      "quoteMaxToken": 110000,
+      "maxTemperature": 1.0,
+      "charsPointsPrice": 0,
+      "censor": false,
+      "vision": true,
+      "datasetProcess": false,
+      "usedInClassify": true,
+      "usedInExtractFields": true,
+      "usedInToolCall": true,
+      "usedInQueryExtension": true,
+      "toolChoice": true,
+      "functionCall": false,
+      "customCQPrompt": "",
+      "customExtractPrompt": "",
+      "defaultSystemChatPrompt": "",
+      "defaultConfig": {}
+    },
+    {
+      "model": "gemini-2.0-flash",
+      "name": "gemini-2.0-flash",
+      "avatar": "/imgs/model/openai.svg",
+      "maxContext": 125000,
+      "maxResponse": 8000,
+      "quoteMaxToken": 110000,
+      "maxTemperature": 1.0,
+      "charsPointsPrice": 0,
+      "censor": false,
+      "vision": true,
+      "datasetProcess": false,
+      "usedInClassify": true,
+      "usedInExtractFields": true,
+      "usedInToolCall": true,
+      "usedInQueryExtension": true,
+      "toolChoice": true,
+      "functionCall": false,
+      "customCQPrompt": "",
+      "customExtractPrompt": "",
+      "defaultSystemChatPrompt": "",
+      "defaultConfig": {}
+    },
+    {
+      "model": "deepseek-chat",
+      "name": "deepseek-chat",
+      "avatar": "/imgs/model/openai.svg",
+      "maxContext": 64000,
+      "maxResponse": 8000,
+      "quoteMaxToken": 48000,
+      "maxTemperature": 0.5,
+      "charsPointsPrice": 0,
+      "censor": false,
+      "vision": true,
+      "datasetProcess": false,
+      "usedInClassify": true,
+      "usedInExtractFields": true,
+      "usedInToolCall": true,
+      "usedInQueryExtension": true,
+      "toolChoice": true,
+      "functionCall": false,
+      "customCQPrompt": "",
+      "customExtractPrompt": "",
+      "defaultSystemChatPrompt": "",
+      "defaultConfig": {}
+    },
+    {
+      "model": "deepseek-reasoner",
+      "name": "deepseek-reasoner",
+      "avatar": "/imgs/model/openai.svg",
+      "maxContext": 64000,
+      "maxResponse": 8000,
+      "quoteMaxToken": 48000,
+      "maxTemperature": 0.5,
+      "charsPointsPrice": 0,
+      "censor": false,
+      "vision": true,
+      "datasetProcess": false,
+      "usedInClassify": true,
+      "usedInExtractFields": true,
+      "usedInToolCall": true,
+      "usedInQueryExtension": true,
+      "toolChoice": true,
+      "functionCall": false,
+      "customCQPrompt": "",
+      "customExtractPrompt": "",
+      "defaultSystemChatPrompt": "",
+      "defaultConfig": {}
     }
   ],
   "vectorModels": [
@@ -162,14 +277,28 @@
       }, // 사용자 정의 추가 파라미터. 예를 들어, embedding3-large를 사용하려면 dimensions:1024를 전달하여 1024 차원의 벡터를 반환하도록 설정.
       "dbConfig": {}, // 저장 시의 추가 파라미터 (비대칭 벡터 모델에서 필요)
       "queryConfig": {} // 훈련 시의 추가 파라미터
+    },
+    {
+      "model": "text-embedding-004",
+      "name": "text-embedding-004",
+      "avatar": "/imgs/model/openai.svg", // 로고
+      "charsPointsPrice": 0, // n 포인트/1k 토큰
+      "defaultToken": 512, // 기본 텍스트 분할 시의 토큰 수
+      "maxToken": 3000, // 최대 토큰 수
+      "weight": 100, // 우선 훈련 가중치
+      "defaultConfig": {
+        "dimensions": 1024 // 벡터 차원 수
+      }, // 사용자 정의 추가 파라미터. 예를 들어, embedding3-large를 사용하려면 dimensions:1024를 전달하여 1024 차원의 벡터를 반환하도록 설정.
+      "dbConfig": {}, // 저장 시의 추가 파라미터 (비대칭 벡터 모델에서 필요)
+      "queryConfig": {} // 훈련 시의 추가 파라미터
     }
   ],
   "reRankModels": [
     {
-      "model": "rerank-multilingual-v3.0",
-      "name": "rerank-multi-v3.0",
-      "requestUrl": "https://api.cohere.ai/v1/rerank",
-      "requestAuth": "API-KEY"
+      "model": "rerank-v3.5",
+      "name": "rerank-v3.5",
+      "requestUrl": "https://api.cohere.com/v2/rerank",
+      "requestAuth": "ahuDu8zA156B2ckeqqtkf5aakji8vSBF01C1NkZ0"
     }
   ], // 재정렬 모델 목록
   "audioSpeechModels": [
@@ -179,12 +308,36 @@
       "charsPointsPrice": 0, // n 포인트/1k 토큰
       "voices": [
         // 지원하는 음성 목록
-        { "label": "Alloy", "value": "alloy", "bufferId": "openai-Alloy" },
-        { "label": "Echo", "value": "echo", "bufferId": "openai-Echo" },
-        { "label": "Fable", "value": "fable", "bufferId": "openai-Fable" },
-        { "label": "Onyx", "value": "onyx", "bufferId": "openai-Onyx" },
-        { "label": "Nova", "value": "nova", "bufferId": "openai-Nova" },
-        { "label": "Shimmer", "value": "shimmer", "bufferId": "openai-Shimmer" }
+        {
+          "label": "Alloy",
+          "value": "alloy",
+          "bufferId": "openai-Alloy"
+        },
+        {
+          "label": "Echo",
+          "value": "echo",
+          "bufferId": "openai-Echo"
+        },
+        {
+          "label": "Fable",
+          "value": "fable",
+          "bufferId": "openai-Fable"
+        },
+        {
+          "label": "Onyx",
+          "value": "onyx",
+          "bufferId": "openai-Onyx"
+        },
+        {
+          "label": "Nova",
+          "value": "nova",
+          "bufferId": "openai-Nova"
+        },
+        {
+          "label": "Shimmer",
+          "value": "shimmer",
+          "bufferId": "openai-Shimmer"
+        }
       ]
     }
   ],
