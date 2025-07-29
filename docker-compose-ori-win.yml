@@ -79,7 +79,8 @@ services:
     restart: always
   fastgpt:
     container_name: fastgpt
-    image: ghcr.io/labring/fastgpt:v4.8.11-fix # git
+    # image: ghcr.io/labring/fastgpt:v4.9.3
+    image: ghcr.io/labring/fastgpt:v4.8.23-fix # git
     # image: registry.cn-hangzhou.aliyuncs.com/fastgpt/fastgpt:v4.8.9 # 阿里云
     ports:
       - 3000:3000
@@ -96,7 +97,7 @@ services:
       # AI模型的API地址哦。务必加 /v1。这里默认填写了OneApi的访问地址。
       - OPENAI_BASE_URL=http://oneapi:3000/v1
       # AI模型的API Key。（这里默认填写了OneAPI的快速默认key，测试通后，务必及时修改）
-      - CHAT_API_KEY=sk-nHXRrMpAu2BO05NGE6Ca1f7fE98c4eB0A81597A7F8622cD5
+      - CHAT_API_KEY=sk-jCkFBUI62GGgxjZy62659b3aF7D04071B6C8C606D815053f
       # 数据库最大连接数
       - DB_MAX_LINK=30
       # 登录凭证密钥

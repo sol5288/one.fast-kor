@@ -33,8 +33,8 @@ services:
     # image: mongo:4.4.29 # cpu不支持AVX时候使用
     container_name: mongo
     restart: always
-    # ports:
-    #   - 27017:27017
+    ports:
+      - 27017:27017
     networks:
       - fastgpt
     command: mongod --keyFile /data/mongodb.key --replSet rs0
