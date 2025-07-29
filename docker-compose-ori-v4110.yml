@@ -96,7 +96,7 @@ services:
     networks:
       - fastgpt
     ports: # comment out if you do not need to expose the port (in production environment, you should not expose the port)
-      - '9002:9002'
+      - '9002:9000'
       - '9001:9001'
     environment:
       - MINIO_ROOT_USER=minioadmin
@@ -105,7 +105,7 @@ services:
       - fastgpt_minio:/data
     command: server /data --console-address ":9001"
     healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:9002/minio/health/live']
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
       interval: 30s
       timeout: 20s
       retries: 3
@@ -198,10 +198,10 @@ services:
       - fastgpt
     environment:
       - AUTH_TOKEN=xxxxxx # disable authentication token if you do not set this variable
-      # 改成 minio 可访问地址，例如 https://192.168.2.2:9002
-      - MINIO_CUSTOM_ENDPOINT=https://192.168.2.2:9002
+      # 改成 minio 可访问地址，例如 https://192.168.2.2:9000
+      - MINIO_CUSTOM_ENDPOINT=https://192.168.2.2:9000
       - MINIO_ENDPOINT=fastgpt-minio
-      - MINIO_PORT=9002
+      - MINIO_PORT=9000
       - MINIO_USE_SSL=false
       - MINIO_ACCESS_KEY=minioadmin
       - MINIO_SECRET_KEY=minioadmin
